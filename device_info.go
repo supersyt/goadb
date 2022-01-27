@@ -67,7 +67,7 @@ func parseDeviceShort(line string) (*DeviceInfo, error) {
 func parseDeviceLong(line string) (*DeviceInfo, error) {
 	fields := strings.Fields(line)
 	if len(fields) <= 2 {
-		return nil, errors.New("device is offline")
+		return nil, errors.Errorf(errors.DeviceNotFound, "device is offline", len(fields))
 	}
 	attrs := parseDeviceAttributes(fields[2:])
 	return newDevice(fields[0], attrs)
